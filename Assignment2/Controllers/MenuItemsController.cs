@@ -11,16 +11,19 @@ using Assignment2.Models;
 
 namespace Assignment2.Controllers
 {
+    [Authorize]
     public class MenuItemsController : Controller
     {
         private MenuContext db = new MenuContext();
 
+        [AllowAnonymous]
         // GET: MenuItems
         public async Task<ActionResult> Index()
         {
             return View(await db.MenuItems.ToListAsync());
         }
 
+        [AllowAnonymous]
         // GET: MenuItems/Details/5
         public async Task<ActionResult> Details(int? id)
         {

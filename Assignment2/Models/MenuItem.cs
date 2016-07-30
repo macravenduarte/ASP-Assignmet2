@@ -17,18 +17,22 @@ namespace Assignment2.Models
 
         [Required]
         [StringLength(50)]
+        [Display (Name = "Brief Description")]
         public string ShortDescription { get; set; }
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Detailed Description")]
         public string LongDescrition { get; set; }
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Thumbnail Image")]
         public string Thumbnail { get; set; }
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "High Resolution Image")]
         public string HighResolution { get; set; }
 
         [Column(TypeName = "money")]
