@@ -11,112 +11,107 @@ using Assignment2.Models;
 
 namespace Assignment2.Controllers
 {
-    public class MenusController : Controller
+    public class MenuItemsController : Controller
     {
-        private MenuModel db = new MenuModel();
+        private MenuContext db = new MenuContext();
 
-        // GET: Menus
+        // GET: MenuItems
         public async Task<ActionResult> Index()
         {
-            var menus = db.Menus.Include(m => m.MenuItem);
-            return View(await menus.ToListAsync());
+            return View(await db.MenuItems.ToListAsync());
         }
 
-        // GET: Menus/Details/5
+        // GET: MenuItems/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Menu menu = await db.Menus.FindAsync(id);
-            if (menu == null)
+            MenuItem menuItem = await db.MenuItems.FindAsync(id);
+            if (menuItem == null)
             {
                 return HttpNotFound();
             }
-            return View(menu);
+            return View(menuItem);
         }
 
-        // GET: Menus/Create
+        // GET: MenuItems/Create
         public ActionResult Create()
         {
-            ViewBag.Id = new SelectList(db.MenuItems, "Id", "Name");
             return View();
         }
 
-        // POST: Menus/Create
+        // POST: MenuItems/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name,ShortDescription,Thumbnail,Price,Type")] Menu menu)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name,ShortDescription,LongDescrition,Thumbnail,HighResolution,Price,ItemType")] MenuItem menuItem)
         {
             if (ModelState.IsValid)
             {
-                db.Menus.Add(menu);
+                db.MenuItems.Add(menuItem);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Id = new SelectList(db.MenuItems, "Id", "Name", menu.Id);
-            return View(menu);
+            return View(menuItem);
         }
 
-        // GET: Menus/Edit/5
+        // GET: MenuItems/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Menu menu = await db.Menus.FindAsync(id);
-            if (menu == null)
+            MenuItem menuItem = await db.MenuItems.FindAsync(id);
+            if (menuItem == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.Id = new SelectList(db.MenuItems, "Id", "Name", menu.Id);
-            return View(menu);
+            return View(menuItem);
         }
 
-        // POST: Menus/Edit/5
+        // POST: MenuItems/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,ShortDescription,Thumbnail,Price,Type")] Menu menu)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,ShortDescription,LongDescrition,Thumbnail,HighResolution,Price,ItemType")] MenuItem menuItem)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(menu).State = EntityState.Modified;
+                db.Entry(menuItem).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.Id = new SelectList(db.MenuItems, "Id", "Name", menu.Id);
-            return View(menu);
+            return View(menuItem);
         }
 
-        // GET: Menus/Delete/5
+        // GET: MenuItems/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Menu menu = await db.Menus.FindAsync(id);
-            if (menu == null)
+            MenuItem menuItem = await db.MenuItems.FindAsync(id);
+            if (menuItem == null)
             {
                 return HttpNotFound();
             }
-            return View(menu);
+            return View(menuItem);
         }
 
-        // POST: Menus/Delete/5
+        // POST: MenuItems/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Menu menu = await db.Menus.FindAsync(id);
-            db.Menus.Remove(menu);
+            MenuItem menuItem = await db.MenuItems.FindAsync(id);
+            db.MenuItems.Remove(menuItem);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

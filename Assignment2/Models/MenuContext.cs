@@ -5,52 +5,35 @@ namespace Assignment2.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class MenuModel : DbContext
+    public partial class MenuContext : DbContext
     {
-        public MenuModel()
-            : base("name=MenuModel1")
+        public MenuContext()
+            : base("name=MenuConnection")
         {
         }
 
-        public virtual DbSet<Menu> Menus { get; set; }
         public virtual DbSet<MenuItem> MenuItems { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Menu>()
+            modelBuilder.Entity<MenuItem>()
                 .Property(e => e.Name)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Menu>()
+            modelBuilder.Entity<MenuItem>()
                 .Property(e => e.ShortDescription)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Menu>()
+            modelBuilder.Entity<MenuItem>()
+                .Property(e => e.LongDescrition)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<MenuItem>()
                 .Property(e => e.Thumbnail)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Menu>()
-                .Property(e => e.Price)
-                .HasPrecision(19, 4);
-
-            modelBuilder.Entity<Menu>()
-                .Property(e => e.Type)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Menu>()
-                .HasOptional(e => e.MenuItem)
-                .WithRequired(e => e.Menu);
-
             modelBuilder.Entity<MenuItem>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<MenuItem>()
-                .Property(e => e.LongDescription)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<MenuItem>()
-                .Property(e => e.HighResolutionImg)
+                .Property(e => e.HighResolution)
                 .IsUnicode(false);
 
             modelBuilder.Entity<MenuItem>()
@@ -58,7 +41,7 @@ namespace Assignment2.Models
                 .HasPrecision(19, 4);
 
             modelBuilder.Entity<MenuItem>()
-                .Property(e => e.Type)
+                .Property(e => e.ItemType)
                 .IsUnicode(false);
         }
     }

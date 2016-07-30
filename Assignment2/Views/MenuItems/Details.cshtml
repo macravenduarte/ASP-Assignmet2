@@ -1,23 +1,15 @@
-﻿@model Assignment2.Models.Menu
+﻿@model Assignment2.Models.MenuItem
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>@ViewBag.Title</h2>
 
 <div>
-    <h4>Menu</h4>
+    <h4>MenuItem</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.MenuItem.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MenuItem.Name)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
@@ -27,19 +19,18 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ShortDescription)
+            @Html.DisplayNameFor(model => model.LongDescrition)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ShortDescription)
+            @Html.DisplayFor(model => model.LongDescrition)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.Thumbnail)
+            @Html.DisplayNameFor(model => model.HighResolution)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Thumbnail)
+            <img src="@Html.DisplayFor(model => model.HighResolution)" style="max-height: 997px; max-width: 1920px; position: center"  />
         </dd>
 
         <dt>
@@ -51,11 +42,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Type)
+            @Html.DisplayNameFor(model => model.ItemType)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Type)
+            @Html.DisplayFor(model => model.ItemType)
         </dd>
 
     </dl>
